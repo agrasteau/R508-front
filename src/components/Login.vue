@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="centered" max-width="500">
     <v-form @submit.prevent="login">
       <v-text-field v-model="email" label="Email" required></v-text-field>
       <v-text-field
@@ -15,7 +15,7 @@
 <script>
 import { defineComponent } from "vue";
 import axios from "axios";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 export default defineComponent({
   name: "Login",
@@ -25,10 +25,13 @@ export default defineComponent({
   methods: {
     async login() {
       try {
-        const response = await axios.post("http://localhost:3000/api/auth/login", {
-          email: this.email,
-          password: this.password,
-        });
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/login",
+          {
+            email: this.email,
+            password: this.password,
+          }
+        );
         console.log(response);
         const token = response.data.token;
         Cookies.set("token", token);
