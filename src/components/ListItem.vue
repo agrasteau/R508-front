@@ -1,8 +1,20 @@
 <template>
   <v-container>
+    <!-- Barre de recherche -->
+    <v-text-field
+      v-model="search"
+      label="Rechercher..."
+      prepend-inner-icon="mdi-magnify"
+      outlined
+      dense
+      class="mb-4"
+    ></v-text-field>
+
+    <!-- Data Table -->
     <v-data-table
       :headers="headers"
       :items="items"
+      :search="search"
       class="elevation-1"
       item-value="code"
     >
@@ -28,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 
 export default defineComponent({
   name: 'ListItem',
@@ -42,14 +54,22 @@ export default defineComponent({
       required: true
     }
   },
+  setup() {
+    // Variable réactive pour la barre de recherche
+    const search = ref('');
+
+    return {
+      search
+    };
+  },
   methods: {
     onEdit(item: any) {
       console.log('Edit clicked for:', item);
-      alert(`Modifier : ${item.name}`);
+      alert(`Modifier : ${item.name} - Fonctionnalité à implémenter`);
     },
     onDelete(item: any) {
       console.log('Delete clicked for:', item);
-      alert(`Supprimer : ${item.name}`);
+      alert(`Supprimer : ${item.name} - Fonctionnalité à implémenter` );
     }
   }
 });
