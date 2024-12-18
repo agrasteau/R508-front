@@ -4,9 +4,8 @@
     <Header />
 
     <!-- Main Content Area -->
-    <v-main>
+    <!-- <v-main>
       <v-container>
-        <!-- List of items rendered below the header -->
         <v-list>
           <ListItem
             v-for="(item, index) in listItems"
@@ -19,7 +18,7 @@
           />
         </v-list>
       </v-container>
-    </v-main>
+    </v-main> -->
   </v-app>
 </template>
 

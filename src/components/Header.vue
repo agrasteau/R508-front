@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="primary" dark>
+  <v-app-bar app color="#e50073" dark>
     <v-toolbar-title>
       <v-icon left>mdi-home</v-icon> IUT de Laval - Informatique
     </v-toolbar-title>
