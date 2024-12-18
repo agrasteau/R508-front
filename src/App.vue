@@ -4,7 +4,7 @@
     <Header />
     <v-main>
       <v-container>
-        <ListItemTable :headers="tableHeaders" :items="tableData" />
+        <ListItem :items="tableData" />
       </v-container>
     </v-main>
   </v-app>
