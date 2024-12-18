@@ -1,10 +1,9 @@
 <template>
   <v-app>
-    <!-- Header (Toolbar) -->
     <Header />
     <v-main>
       <v-container>
-        <ListItem :items="tableData" />
+        <ListItem :headers="tableHeaders" :items="tableData" />
       </v-container>
     </v-main>
   </v-app>
@@ -12,8 +11,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from './components/Header.vue';  // Import the Header component
-import ListItem from './components/ListItem.vue'; // Import the ListItem component
+import Header from './components/Header.vue'; 
+import ListItem from './components/ListItem.vue'; 
 
 export default defineComponent({
   name: 'App',
@@ -23,7 +22,14 @@ export default defineComponent({
   },
    data() {
     return {
-      // Données dynamiques pour le tableau
+     
+      tableHeaders: [
+        { title: 'Code', key: 'code', align: 'start' },
+        { title: 'Nom', key: 'name' },
+        { title: 'Crédits', key: 'credits' },
+        { title: 'Actions', key: 'actions', sortable: false }
+      ],
+      
       tableData: [
         { code: 'R5.A.08', name: 'Qualité de développement', credits: 5 },
         { code: 'INFO101', name: 'Introduction aux BDD', credits: 3 },
@@ -33,7 +39,6 @@ export default defineComponent({
   },
   methods: {
     handleActionClick() {
-      // Action triggered when the button in ListItem is clicked
       alert('Action button clicked!');
     }
   }

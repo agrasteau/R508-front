@@ -26,27 +26,21 @@
     </v-data-table>
   </v-container>
 </template>
+
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'ListItem',
   props: {
+    headers: {
+      type: Array as PropType<Array<{ title: string; key: string; align?: string; sortable?: boolean }>>,
+      required: true
+    },
     items: {
       type: Array as PropType<Array<{ code: string; name: string; credits: number }>>,
       required: true
     }
-  },
-  data() {
-    return {
-      // Définition des colonnes du tableau
-      headers: [
-        { title: 'Code', key: 'code', align: 'start' },
-        { title: 'Nom', key: 'name' },
-        { title: 'Crédits', key: 'credits' },
-        { title: 'Actions', key: 'actions', sortable: false }
-      ]
-    };
   },
   methods: {
     onEdit(item: any) {
@@ -62,7 +56,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Styles personnalisés si nécessaire */
 .v-btn {
   margin: 0 4px;
 }
