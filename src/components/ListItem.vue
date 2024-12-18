@@ -1,57 +1,69 @@
 <template>
-  <v-list-item>
-    <!-- Icon -->
-    <v-list-item-avatar v-if="icon">
-      <v-icon>{{ icon }}</v-icon>
-    </v-list-item-avatar>
-
-    <!-- Content (Title and Subtitle) -->
-    <v-list-item-content>
-      <v-list-item-title>{{ title }}</v-list-item-title>
-      <v-list-item-subtitle v-if="subtitle">{{ subtitle }}</v-list-item-subtitle>
-    </v-list-item-content>
-
-    <!-- Action Button -->
-    <v-list-item-action v-if="action">
-      <v-btn icon @click="onActionClick">
-        <v-icon>mdi-chevron-right</v-icon>
-      </v-btn>
-    </v-list-item-action>
-  </v-list-item>
+  <v-container>
+    <v-data-table
+      :headers="headers"
+      :items="items"
+      class="elevation-1"
+      item-value="code"
+    >
+      <!-- Slot pour les actions -->
+      <template #item.actions="{ item }">
+        <v-btn
+          icon
+          color="primary"
+          @click="onEdit(item)"
+        >
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+        <v-btn
+          icon
+          color="red"
+          @click="onDelete(item)"
+        >
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </template>
+    </v-data-table>
+  </v-container>
 </template>
-
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'ListItem',
   props: {
-    title: {
-      type: String,
+    items: {
+      type: Array as PropType<Array<{ code: string; name: string; credits: number }>>,
       required: true
-    },
-    subtitle: {
-      type: String,
-      required: false
-    },
-    icon: {
-      type: String,
-      required: false
-    },
-    action: {
-      type: Boolean,
-      required: false,
-      default: false
     }
   },
+  data() {
+    return {
+      // Définition des colonnes du tableau
+      headers: [
+        { title: 'Code', key: 'code', align: 'start' },
+        { title: 'Nom', key: 'name' },
+        { title: 'Crédits', key: 'credits' },
+        { title: 'Actions', key: 'actions', sortable: false }
+      ]
+    };
+  },
   methods: {
-    onActionClick() {
-      this.$emit('action-click');
+    onEdit(item: any) {
+      console.log('Edit clicked for:', item);
+      alert(`Modifier : ${item.name}`);
+    },
+    onDelete(item: any) {
+      console.log('Delete clicked for:', item);
+      alert(`Supprimer : ${item.name}`);
     }
   }
 });
 </script>
 
 <style scoped>
-/* You can add custom styles here if needed */
+/* Styles personnalisés si nécessaire */
+.v-btn {
+  margin: 0 4px;
+}
 </style>
