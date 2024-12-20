@@ -9,8 +9,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from './components/Header.vue';  // Import the Header component
-import ListItem from './components/ListItem.vue'; // Import the ListItem component
+import Header from './components/Header.vue'; 
+import ListItem from './components/ListItem.vue'; 
+import Login from './components/Login.vue';
+
 
 export default defineComponent({
   name: 'App',
