@@ -32,7 +32,7 @@ export default defineComponent({
         { label: 'Cours', icon: 'mdi-book', link: '/classes' },
         { label: 'Notes', icon: 'mdi-pencil', link: '/grades' },
         { label: 'Statistiques', icon: 'mdi-chart-bar', link: '/stats' },
-        { label: 'Déconnexion', icon: 'mdi-logout', link: '/login' }
+        { label: 'Déconnexion', icon: 'mdi-logout', link: '/login?deco=true' }
       ]
     };
   }
