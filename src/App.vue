@@ -31,6 +31,37 @@
 import { defineComponent } from 'vue';
 import Header from './components/Header.vue'; 
 import ListItem from './components/ListItem.vue'; 
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+const email = "prof@example.com";
+const password = "password123";
+
+try {
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/login",
+          {
+            email: email,
+            password: password,
+          }
+        );
+        console.log(response);
+        const token = response.data.token;
+        Cookies.set("token", token);
+        console.log("Token:", token);
+
+
+        const coursesResponse = await axios.get("http://localhost:3000/api/courses", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Ajouter le token dans le header Authorization
+          },
+        });
+
+        console.log("Courses:", coursesResponse.data);
+
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
 
 export default defineComponent({
   name: 'App',
