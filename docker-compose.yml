@@ -7,6 +7,6 @@ services:
       - NODE_ENV=development
     working_dir: /usr/app
     restart: always
-    command: bash -c "npm install && npm run build && npm run dev"
+    command: bash -c "npm install && npm run dev"
     ports:
       - 5173:5173
