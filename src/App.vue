@@ -1,36 +1,18 @@
 <template>
   <v-app>
-    <Header />
     <v-main>
-      <v-container>
-        <!-- Titre et bouton "Ajouter un cours" -->
-        <v-row class="align-center mb-4">
-          <v-col cols="8">
-            <h1 class="text-h4 font-weight-bold">Liste des Cours</h1>
-          </v-col>
-          <v-col cols="4" class="text-right">
-            <v-btn
-              color="primary"
-              dark
-              @click="onAddCourse"
-            >
-              <v-icon left>mdi-plus</v-icon>
-              Ajouter un cours
-            </v-btn>
-          </v-col>
-        </v-row>
-
-        <!-- Liste des cours -->
-        <ListItem :headers="tableHeaders" :items="tableData" />
-      </v-container>
+    <Header />
+    <router-view />
     </v-main>
-  </v-app>
+   </v-app>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Header from './components/Header.vue'; 
 import ListItem from './components/ListItem.vue'; 
+import Login from './components/Login.vue';
+
 
 export default defineComponent({
   name: 'App',
@@ -125,7 +107,10 @@ export default defineComponent({
         {'code': 'R6.A.06', 'name': 'Maintenance applicative', 'credits': 8}
       ]
     };
+    ListItem,
+    Login
   },
+  
   methods: {
     handleActionClick() {
       alert('Action button clicked! - Fonctionnalité à implémenter');

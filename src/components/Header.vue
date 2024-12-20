@@ -6,7 +6,13 @@
     <v-spacer></v-spacer>
     
     <!-- Boutons de navigation -->
-    <v-btn v-for="(button, index) in buttons" :key="index"  text>
+    <v-btn 
+      v-for="(button, index) in buttons" 
+      :key="index" 
+      :to="button.link" 
+      router 
+      text
+    >
       <v-icon>{{ button.icon }}</v-icon>
       {{ button.label }}
     </v-btn>
@@ -16,21 +22,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { RouterLink } from 'vue-router'; // Importation de RouterLink pour la navigation
 
 export default defineComponent({
   name: 'Header',
-  components: {
-    RouterLink // Déclaration du composant RouterLink
-  },
   data() {
     return {
       buttons: [
-        { label: 'Étudiants', icon: 'mdi-account', link: '/etudiants' },
-        { label: 'Cours', icon: 'mdi-book', link: '/cours' },
-        { label: 'Notes', icon: 'mdi-pencil', link: '/notes' },
-        { label: 'Statistiques', icon: 'mdi-chart-bar', link: '/statistiques' },
-        { label: 'Déconnexion', icon: 'mdi-logout', link: '/deconnexion' }
+        { label: 'Étudiants', icon: 'mdi-account', link: '/students' },
+        { label: 'Cours', icon: 'mdi-book', link: '/classes' },
+        { label: 'Notes', icon: 'mdi-pencil', link: '/grades' },
+        { label: 'Statistiques', icon: 'mdi-chart-bar', link: '/stats' },
+        { label: 'Déconnexion', icon: 'mdi-logout', link: '/login' }
       ]
     };
   }
