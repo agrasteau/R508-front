@@ -42,7 +42,7 @@ import { defineComponent } from 'vue';
 import ListItem from '../components/ListItem.vue'; 
 export default defineComponent({
   name: 'StudentDetails',
- components: {
+  components: {
     ListItem,
   },
   data() {
@@ -53,25 +53,31 @@ export default defineComponent({
         email: 'alexis@example.com',
         birthdate: '28/05/2002',
       },
+      headers: [
+        { title: 'Étudiant', key: 'student', align: 'start', sortable: true },
+        { title: 'Cours', key: 'course', align: 'start', sortable: true },
+        { title: 'Note', key: 'grade', align: 'center', sortable: true },
+        { title: 'Semestre', key: 'semester', align: 'center', sortable: true },
+        { title: 'Actions', key: 'actions', align: 'center', sortable: false },
+      ],
       grades: [
         {
-          étudient: 'INFO101 - Introduction aux BDD',
+          student: 'N/A',
           course: 'R5.A.08 - Qualité de développement',
           grade: '18.00/20',
           semester: 'S4 - 2024-2025',
         },
         {
-          étudient: 'INFO101 - Introduction aux BDD',
+          student: 'N/A',
           course: 'INFO101 - Introduction aux BDD',
           grade: '16.00/20',
           semester: 'S4 - 2024-2025',
         },
         {
-          étudient: 'INFO101 - Introduction aux BDD',
+          student: 'N/A',
           course: 'INFO101 - Introduction aux BDD',
           grade: '15.00/20',
           semester: 'S3 - 2024-2025',
-          icon: 'mdi-pencil', action: true
         },
       ],
     };
