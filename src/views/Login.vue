@@ -23,7 +23,22 @@ export default defineComponent({
   data() {
     return { email: "", password: "" };
   },
-  mounted() { this.$emit('disableBar'); },
+  mounted() {
+    this.$emit("disableBar");
+
+    // Obtenir les paramètres de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Récupérer les valeurs du paramètre
+    const deco = urlParams.get("deco");
+
+    console.log(deco);
+
+    if (deco == "true") {
+      Cookies.remove("token");
+      alert("vous avez bien ete deconnecter");
+    } 
+  },
   methods: {
     async login() {
       try {
@@ -37,7 +52,7 @@ export default defineComponent({
         console.log(response);
         const token = response.data.token;
         Cookies.set("token", token);
-        this.$emit('enableBar');
+        this.$emit("enableBar");
         this.$router.push("/students");
       } catch (error) {
         console.error("Login failed:", error);
