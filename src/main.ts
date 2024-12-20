@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createVuetify } from 'vuetify';
-import { VApp, VAppBar, VToolbarTitle, VSpacer, VBtn, VList, VIcon, VMain, VContainer, VListItem, VListItemAction, VListItemMedia, VListItemTitle, VListItemSubtitle,} from 'vuetify/components'; // Importation des composants
+import { VApp, VAppBar, VToolbarTitle, VSpacer, VBtn, VList, VIcon, VMenu, VAppBarNavIcon, VMain, VContainer, VListItem, VListItemAction, VListItemMedia, VListItemTitle, VListItemSubtitle,} from 'vuetify/components'; // Importation des composants
 import 'vuetify/styles';
 import '@mdi/font/css/materialdesignicons.css'; // Import MDI icons CSS
 import router from './router';
@@ -25,6 +25,9 @@ const vuetify = createVuetify({
     VListItemMedia,
     VListItemTitle,
     VListItemSubtitle,
+    VMenu,
+    VAppBarNavIcon,
+
 
 
   },
