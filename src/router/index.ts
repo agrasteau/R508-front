@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: '/login', // redirection par défaut vers la page students
+    redirect: '/login', // redirection par défaut vers la page login
   },
   {
     path: '/students',

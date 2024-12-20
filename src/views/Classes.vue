@@ -1,10 +1,6 @@
 <template>
   <v-app>
-    <!-- Header (Toolbar) -->
-    <Header />
-
-    <!-- Main Content Area -->
-    <!-- <v-main>
+<v-main>
       <v-container>
         <v-list>
           <ListItem
@@ -18,7 +14,7 @@
           />
         </v-list>
       </v-container>
-    </v-main> -->
+    </v-main> 
   </v-app>
 </template>
 
