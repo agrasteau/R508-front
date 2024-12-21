@@ -2,14 +2,15 @@
   <v-container class="centered" max-width="500">
     <v-container height="35vh" />
     <v-form @submit.prevent="login">
-      <v-text-field v-model="email" label="Email" required></v-text-field>
+      <v-text-field v-model="email" id="id" label="Email" required></v-text-field>
       <v-text-field
+         id="password"
         v-model="password"
         label="Password"
         type="password"
         required
       ></v-text-field>
-      <v-btn type="submit" color="primary">Login</v-btn>
+      <v-btn type="submit" id="login" color="primary">Login</v-btn>
     </v-form>
   </v-container>
 </template>
