@@ -2,6 +2,7 @@
   <v-app>
 <v-main>
       <v-container>
+        classes
         <v-list>
           <ListItem
             v-for="(item, index) in listItems"
@@ -14,6 +15,7 @@
           />
         </v-list>
       </v-container>
+      
     </v-main> 
   </v-app>
 </template>
