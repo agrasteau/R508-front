@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <v-container>
-        <v-btn @click="ajouterUnNote" color="primary">Ajouter une note</v-btn> 
+        <v-btn @click="ajouterUnNote" color="primary">Ajouter une note</v-btn>
         <v-list>
           <ListItem :headers="mheaders" :items="items" :title="title" />
         </v-list>
@@ -31,11 +31,11 @@ export default defineComponent({
       [
         {
           title: "Nom",
-          key: "studentLastName",
+          key: "name",
         },
         {
-          title: "Prenom",
-          key: "studentFirstName",
+          title: "Cour",
+          key: "course",
         },
         {
           title: "Note",
@@ -50,15 +50,10 @@ export default defineComponent({
     const items = ref<
       Array<{
         id: number;
-        studentId: number;
-        courseId: number;
+        name: string;
+        course: number;
         grade: number;
         semester: string;
-        academicYear: string;
-        studentFirstName: string;
-        studentLastName: string;
-        courseCode: string;
-        courseName: string;
       }>
     >([]);
     // Requête API pour récupérer les items
@@ -73,7 +68,28 @@ export default defineComponent({
         // await api.post('/grades', { ...newGrade.value });
         const response = await api.get("/grades");
         console.info(response.data);
-        items.value = response.data;
+        //[
+        //   {
+        //     "id": 0,
+        //     "studentId": 0,
+        //     "courseId": 0,
+        //     "grade": 20,
+        //     "semester": "S1",
+        //     "academicYear": "3482-0192",
+        //     "studentFirstName": "string",
+        //     "studentLastName": "string",
+        //     "courseCode": "string",
+        //     "courseName": "string"
+        //   }
+        // ]
+        items.value = response.data.map((grade) => ({
+          id: grade.id,
+          name: grade.studentLastName + " " + grade.studentFirstName,
+          course: grade.courseCode + " " + grade.courseName,
+          grade: grade.grade,
+          semester: grade.semester + " " + grade.academicYear,
+        }));
+        console.log(items.value)
       } catch (error) {
         console.error("Failed to fetch items:", error);
       }
@@ -82,7 +98,7 @@ export default defineComponent({
     onMounted(() => {
       fetchItems();
     });
-    return { search, items , mheaders};
+    return { search, items, mheaders,title };
   },
   methods: {
     handleActionClick() {
@@ -91,7 +107,7 @@ export default defineComponent({
     },
     ajouterUnNote() {
       this.$router.push("/newGrades");
-    }
+    },
   },
 });
 </script>
