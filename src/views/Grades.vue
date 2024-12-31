@@ -2,6 +2,7 @@
   <v-app>
     <v-main>
       <v-container>
+        <v-btn @click="ajouterUnNote" color="primary">Ajouter une note</v-btn> 
         <v-list>
           <ListItem :headers="mheaders" :items="items" :title="title" />
         </v-list>
@@ -88,6 +89,9 @@ export default defineComponent({
       // Action triggered when the button in ListItem is clicked
       alert("Action button clicked!");
     },
+    ajouterUnNote() {
+      this.$router.push("/newGrades");
+    }
   },
 });
 </script>
