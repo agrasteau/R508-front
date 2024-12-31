@@ -3,7 +3,7 @@
     <v-main>
       <v-container>
         <v-list>
-          <ListItem :headers="headers" :items="items" :title="title"/>
+          <ListItem :headers="mheaders" :items="items" :title="title" />
         </v-list>
       </v-container>
     </v-main>
@@ -24,7 +24,28 @@ export default defineComponent({
     // Variables réactives
     const title = "notes des etudiants";
     const search = ref("");
-    const headers = ref(Array<{ title: string; key: string; align?: string; sortable?: boolean }>);
+    const mheaders = ref(
+      // Array<{ title: string; key: string; align?: string; sortable?: boolean }>
+
+      [
+        {
+          title: "Nom",
+          key: "studentLastName",
+        },
+        {
+          title: "Prenom",
+          key: "studentFirstName",
+        },
+        {
+          title: "Note",
+          key: "grade",
+        },
+        {
+          title: "semestre",
+          key: "semester",
+        },
+      ]
+    );
     const items = ref<
       Array<{
         id: number;
@@ -60,7 +81,7 @@ export default defineComponent({
     onMounted(() => {
       fetchItems();
     });
-    return { search, items };
+    return { search, items , mheaders};
   },
   methods: {
     handleActionClick() {
@@ -68,6 +89,5 @@ export default defineComponent({
       alert("Action button clicked!");
     },
   },
-  
 });
 </script>
