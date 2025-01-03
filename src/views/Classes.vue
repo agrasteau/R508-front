@@ -2,9 +2,10 @@
   <v-app>
 <v-main>
       <v-container>
-        <v-btn class="pink-btn" @click="$router.push('/newcourse')">
-          <v-icon left></v-icon> Ajout d'un nouveau cours
+        <v-btn color="primary" @click="$router.push('/newcourse')">
+            Ajout d'un nouveau cours
         </v-btn>
+
         <v-list>
           <ListItem
           :headers="mheaders"
