@@ -1,0 +1,128 @@
+<template>
+    <v-app>
+      <v-main>
+        <v-container>
+          <v-card>
+            <v-card-title>Modifier un cours</v-card-title>
+            <v-card-text>
+              <v-form ref="form" v-model="valid">
+                <v-text-field
+                  label="Code du cours"
+                  v-model="course.code"
+                  :rules="[rules.required]"
+                  required
+                ></v-text-field>
+  
+                <v-text-field
+                  label="Nom du cours"
+                  v-model="course.name"
+                  :rules="[rules.required]"
+                  required
+                ></v-text-field>
+  
+                <v-text-field
+                  label="Crédits"
+                  v-model="course.credits"
+                  type="number"
+                  :rules="[rules.required, rules.numeric]"
+                  required
+                ></v-text-field>
+  
+                <v-textarea
+                  label="Description"
+                  v-model="course.description"
+                  :rules="[rules.required]"
+                  required
+                ></v-textarea>
+  
+                <v-btn :disabled="!valid" @click="submitCourse" color="primary">
+                  Modifier
+                </v-btn>
+              </v-form>
+            </v-card-text>
+          </v-card>
+        </v-container>
+      </v-main>
+    </v-app>
+  </template>
+  
+  <script lang="ts">
+  import { defineComponent, ref, onMounted } from "vue";
+  import axios from "axios";
+  import Cookies from "js-cookie";
+  import { useRouter, useRoute } from "vue-router";
+  
+  export default defineComponent({
+    name: "EditCourse",
+    setup() {
+      const valid = ref(false);
+      const course = ref({
+        id: 0,
+        code: "",
+        name: "",
+        credits: 1,
+        description: "",
+      });
+      const token = Cookies.get("token");
+      const router = useRouter();
+      const route = useRoute();
+  
+      const rules = {
+        required: (value: string) => !!value || "Ce champ est requis.",
+        numeric: (value: number) =>
+          !isNaN(value) || "Veuillez entrer un nombre valide.",
+      };
+  
+      const fetchCourse = async (id: number) => {
+        try {
+          const response = await axios.get(`http://localhost:3000/api/courses/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          course.value = response.data;
+        } catch (error) {
+          console.error("Erreur lors de la récupération du cours", error);
+          alert("Impossible de charger les données du cours.");
+        }
+      };
+  
+      const submitCourse = async () => {
+        try {
+          const preparedCourse = {
+            ...course.value,
+            credits: Number(course.value.credits) || 0,
+          };
+  
+          await axios.put(
+            `http://localhost:3000/api/courses/${course.value.id}`,
+            preparedCourse,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          router.push("/classes");
+        } catch (error) {
+          console.error("Erreur lors de la modification du cours", error);
+          alert("Une erreur est survenue. Veuillez réessayer.");
+        }
+      };
+  
+      onMounted(() => {
+        const id = route.query.id;
+        if (id) {
+          fetchCourse(Number(id));
+        } else {
+          alert("Aucun identifiant de cours fourni.");
+          router.push("/classes");
+        }
+      });
+  
+      return { valid, course, rules, submitCourse };
+    },
+  });
+  </script>
+  
