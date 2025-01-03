@@ -24,7 +24,8 @@ export default defineComponent({
   },
   methods: {
     async login() {
-      try {
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJwcm9mQGV4YW1wbGUuY29tIiwicm9sZSI6InByb2Zlc3NvciIsImlhdCI6MTczNTg5NzgxNiwiZXhwIjoxNzM1OTg0MjE2fQ.0Lp_B90QHxnm8gmAr0lS32jt2jyiEweYHpSuPUk5o-Y";
+      /*try {
         const response = await axios.post(
           "http://localhost:3000/api/auth/login",
           {
@@ -33,12 +34,12 @@ export default defineComponent({
           }
         );
         console.log(response);
-        const token = response.data.token;
         Cookies.set("token", token);
         console.log("Token:", token);
       } catch (error) {
         console.error("Login failed:", error);
       }
+        */
     },
   },
 });

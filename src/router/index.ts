@@ -5,6 +5,7 @@ import Grades from '../views/Grades.vue';
 import Classes from '../views/Classes.vue';
 import Login from '../views/Login.vue';
 import StudentDetail from '../views/StudentDetail.vue';
+import NewCourse from '../views/NewCourse.vue';
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     name: 'student-detail',
     component: StudentDetail,
     props: true, // permet de passer l'id en tant que prop à StudentDetail
+  },
+  {
+    path: '/newcourse',
+    name: 'newcourse',
+    component: NewCourse,
   },
 ];
 

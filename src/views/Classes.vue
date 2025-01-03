@@ -2,15 +2,13 @@
   <v-app>
 <v-main>
       <v-container>
+        <v-btn class="pink-btn" @click="$router.push('/newcourse')">
+          <v-icon left></v-icon> Ajout d'un nouveau cours
+        </v-btn>
         <v-list>
           <ListItem
-            v-for="(item, index) in listItems"
-            :key="index"
-            :title="item.title"
-            :subtitle="item.subtitle"
-            :icon="item.icon"
-            :action="item.action"
-            @action-click="handleActionClick"
+          :headers="headers"
+          :items="items"
           />
         </v-list>
       </v-container>
@@ -19,15 +17,47 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import Header from '../components/Header.vue';  // Import the Header component
 import ListItem from '../components/ListItem.vue'; // Import the ListItem component
+
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+const newCourse = null;
+
+
 
 export default defineComponent({
   name: 'Classes',
   components: {
     Header,
     ListItem
+  },
+  setup() {
+    const token = Cookies.get('token');
+
+    const items = ref([]);
+
+    const fetchItems = async () => {
+      try{
+        const coursesResponse = await axios.get("http://localhost:3000/api/courses", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    items.value = coursesResponse.data;
+  }
+    catch{
+
+    } 
+  
+  }
+  onMounted(() => {
+      fetchItems();
+      console.log(items);
+    });
+  return {items};
   },
   data() {
     return {
@@ -40,11 +70,5 @@ export default defineComponent({
       ]
     };
   },
-  methods: {
-    handleActionClick() {
-      // Action triggered when the button in ListItem is clicked
-      alert('Action button clicked!');
-    }
-  }
 });
 </script>
