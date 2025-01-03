@@ -4,7 +4,7 @@
       <v-container>
         <v-row class="align-center justify-space-between">
           <v-col cols="auto">
-            <h3>Cours</h3>
+            <h3 id='title_classes'>Cours</h3>
           </v-col>
           <v-col cols="auto">
             <v-btn color="primary" @click="$router.push('/newcourse')">

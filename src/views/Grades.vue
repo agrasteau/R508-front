@@ -4,7 +4,7 @@
       <v-container>
         <v-row class="align-center justify-space-between">
         <v-col cols="auto">
-          <h3>Notes</h3>
+          <h3 id='title_grades'>Notes</h3>
         </v-col>
         <v-col cols="auto">
           <v-btn @click="ajouterUnNote" color="primary">Ajouter une note</v-btn>
