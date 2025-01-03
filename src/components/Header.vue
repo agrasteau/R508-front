@@ -10,6 +10,7 @@
       v-for="(button, index) in buttons" 
       :key="index" 
       :to="button.link" 
+      :id="button.id"
       router 
       text
     >
@@ -28,11 +29,11 @@ export default defineComponent({
   data() {
     return {
       buttons: [
-        { label: 'Étudiants', icon: 'mdi-account', link: '/students' },
-        { label: 'Cours', icon: 'mdi-book', link: '/classes' },
-        { label: 'Notes', icon: 'mdi-pencil', link: '/grades' },
-        { label: 'Statistiques', icon: 'mdi-chart-bar', link: '/stats' },
-        { label: 'Déconnexion', icon: 'mdi-logout', link: '/login' }
+        { label: 'Étudiants', id:'students', icon: 'mdi-account', link: '/students' },
+        { label: 'Cours', id:'classes',  icon: 'mdi-book', link: '/classes' },
+        { label: 'Notes', id:'grades', icon: 'mdi-pencil', link: '/grades' },
+        { label: 'Statistiques', id:'stats', icon: 'mdi-chart-bar', link: '/stats' },
+        { label: 'Déconnexion', id:'logout', icon: 'mdi-logout', link: '/login?deco=true' }
       ]
     };
   }
