@@ -4,7 +4,13 @@
       <v-container>
         <v-btn @click="ajouterUnNote" color="primary">Ajouter une note</v-btn>
         <v-list>
-          <ListItem :headers="mheaders" :items="items" :title="title" />
+          <ListItem
+            :headers="mheaders"
+            :items="items"
+            :title="title"
+            @edit="modifierUneNote"
+            @delete="supprimerUneNote"
+          />
         </v-list>
       </v-container>
     </v-main>
@@ -15,6 +21,7 @@
 import { defineComponent, onMounted, ref } from "vue";
 import ListItem from "../components/ListItem.vue";
 import api from "../plugins/api";
+import router from "../router";
 
 export default defineComponent({
   name: "Grades",
@@ -44,6 +51,10 @@ export default defineComponent({
         {
           title: "semestre",
           key: "semester",
+        },
+        { 
+          title: "Actions", 
+          key: "actions" 
         },
       ]
     );
@@ -89,7 +100,7 @@ export default defineComponent({
           grade: grade.grade,
           semester: grade.semester + " " + grade.academicYear,
         }));
-        console.log(items.value)
+        console.log(items.value);
       } catch (error) {
         console.error("Failed to fetch items:", error);
       }
@@ -98,15 +109,34 @@ export default defineComponent({
     onMounted(() => {
       fetchItems();
     });
-    return { search, items, mheaders,title };
+
+    const modifierUneNote = (id: number) => {
+      router.push(`/editgrades/${id}`);
+    };
+
+    const supprimerUneNote = async (id) => {
+      try {
+        await api.delete(`/grades/${id}`);
+        fetchItems(); // Refresh the list after deletion
+        alert("Note supprimée avec succès !");
+      } catch (error) {
+        console.error("Failed to delete grade:", error);
+        alert("Erreur lors de la suppression de la note.");
+      }
+    };
+
+    return {
+      search,
+      items,
+      mheaders,
+      title,
+      modifierUneNote,
+      supprimerUneNote,
+    };
   },
   methods: {
-    handleActionClick() {
-      // Action triggered when the button in ListItem is clicked
-      alert("Action button clicked!");
-    },
     ajouterUnNote() {
-      this.$router.push("/newGrades");
+      router.push("/newGrades");
     },
   },
 });

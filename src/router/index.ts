@@ -7,6 +7,7 @@ import Login from "../views/Login.vue";
 import StudentDetail from "../views/StudentDetail.vue";
 import Cookies from "js-cookie";
 import NewGrades from "../views/NewGrades.vue";
+import EditGrades from "../views/EditGrades.vue";
 
 const routes = [
   {
@@ -43,6 +44,12 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+  },
+  {
+    path: "/editgrades/:id",
+    name: "editGrade",
+    component: EditGrades,
+    props: true,
   },
   {
     path: "/students/:id",
