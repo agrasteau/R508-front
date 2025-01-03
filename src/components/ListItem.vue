@@ -16,22 +16,14 @@
       :items="items"
       :search="search"
       class="elevation-1"
-      item-value="code"
+      item-value="id"
     >
       <!-- Slot pour les actions -->
       <template #item.actions="{ item }">
-        <v-btn
-          icon
-          color="primary"
-          @click="onEdit(item)"
-        >
+        <v-btn icon color="primary" @click="$emit('edit', item.id)">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-        <v-btn
-          icon
-          color="red"
-          @click="onDelete(item)"
-        >
+        <v-btn icon color="red" @click="$emit('delete', item.id)">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
       </template>
@@ -50,7 +42,7 @@ export default defineComponent({
       required: true
     },
     items: {
-      type: Array as PropType<Array<{ code: string; name: string; credits: number }>>,
+      type: Array as PropType<Array<{ id: number; }>>,
       required: true
     }
   },
@@ -62,16 +54,6 @@ export default defineComponent({
       search
     };
   },
-  methods: {
-    onEdit(item: any) {
-      console.log('Edit clicked for:', item);
-      alert(`Modifier : ${item.name} - Fonctionnalité à implémenter`);
-    },
-    onDelete(item: any) {
-      console.log('Delete clicked for:', item);
-      alert(`Supprimer : ${item.name} - Fonctionnalité à implémenter` );
-    }
-  }
 });
 </script>
 

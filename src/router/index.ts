@@ -6,6 +6,7 @@ import Classes from '../views/Classes.vue';
 import Login from '../views/Login.vue';
 import StudentDetail from '../views/StudentDetail.vue';
 import NewCourse from '../views/NewCourse.vue';
+import EditCourse from '../views/EditCourse.vue';
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/newcourse',
     name: 'newcourse',
     component: NewCourse,
+  },
+  {
+    path: '/editcourse',
+    name: 'editcourse',
+    component: EditCourse,
   },
 ];
 
