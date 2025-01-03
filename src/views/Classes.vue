@@ -27,8 +27,6 @@ import { useRouter } from 'vue-router';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const newCourse = null;
-
 export default defineComponent({
   name: 'Classes',
   components: {
@@ -84,7 +82,6 @@ export default defineComponent({
   }
 
   const editCourse = async (id: number) => {
-    //router.push(`/newcourse`);
     router.push(`/editcourse?id=${id}`);
     }
 
