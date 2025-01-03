@@ -7,7 +7,7 @@
             <h3 id='title_classes'>Cours</h3>
           </v-col>
           <v-col cols="auto">
-            <v-btn color="primary" @click="$router.push('/newcourse')">
+            <v-btn id='new_classe' color="primary" @click="$router.push('/newcourse')">
                 Ajout d'un nouveau cours
             </v-btn>      
           </v-col>
