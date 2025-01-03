@@ -2,7 +2,14 @@
   <v-app>
     <v-main>
       <v-container>
-        <v-btn @click="ajouterUnNote" color="primary">Ajouter une note</v-btn>
+        <v-row class="align-center justify-space-between">
+        <v-col cols="auto">
+          <h3>Notes</h3>
+        </v-col>
+        <v-col cols="auto">
+          <v-btn @click="ajouterUnNote" color="primary">Ajouter une note</v-btn>
+        </v-col>
+        </v-row>
         <v-list>
           <ListItem
             :headers="mheaders"
