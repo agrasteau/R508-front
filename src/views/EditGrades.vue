@@ -5,6 +5,7 @@
         <v-form @submit.prevent="submitForm">
           <v-select
             :items="students"
+            id="student"
             label="Étudiant"
             item-title="name"
             item-value="id"
@@ -13,6 +14,7 @@
           ></v-select>
           <v-select
             :items="courses"
+            id="course"
             label="Cour"
             item-title="name"
             item-value="id"
@@ -21,16 +23,19 @@
           ></v-select>
           <v-text-field
             label="Note"
+            id="grades"
             v-model.number="grade.grade"
             type="number"
             required
           ></v-text-field>
           <v-text-field
+            id="semester"
             label="Semestre"
             v-model="grade.semester"
             required
           ></v-text-field>
           <v-text-field
+            id="year"
             label="Année Académique"
             v-model="grade.academicYear"
             required

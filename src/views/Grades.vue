@@ -7,7 +7,7 @@
           <h3 id='title_grades'>Notes</h3>
         </v-col>
         <v-col cols="auto">
-          <v-btn @click="ajouterUnNote" color="primary">Ajouter une note</v-btn>
+          <v-btn id='new_grade'@click="ajouterUnNote" color="primary">Ajouter une note</v-btn>
         </v-col>
         </v-row>
         <v-list>

@@ -2,35 +2,41 @@
   <v-app>
     <v-main>
       <v-container>
+        <v-card-title id="new_grade_title">Ajouter une novelle note</v-card-title>
         <v-form @submit.prevent="submitForm">
-          <v-select
+          <v-autocomplete
             :items="students"
+            id="student"
             label="Étudiant"
             item-title="name"
             item-value="id"
             v-model="newGrade.studentId"
             required
-          ></v-select>
-          <v-select
+          ></v-autocomplete>
+          <v-autocomplete
             :items="courses"
+            id="classe"
             label="Cour"
             item-title="name"
             item-value="id"
             v-model="newGrade.courseId"
             required
-          ></v-select>
+          ></v-autocomplete>
           <v-text-field
             label="Note"
+            id="grades"
             v-model.number="newGrade.grade"
             type="number"
             required
           ></v-text-field>
           <v-text-field
             label="Semestre"
+            id="semester"
             v-model="newGrade.semester"
             required
           ></v-text-field>
           <v-text-field
+            id="year"
             label="Année Académique"
             v-model="newGrade.academicYear"
             required
