@@ -2,7 +2,6 @@
   <v-app>
     <v-main>
       <v-container>
-        <!-- Titre et sélection de l'année académique -->
         <v-row class="d-flex align-center">
           <v-col cols="6">
             <h1>Statistiques</h1>
@@ -18,7 +17,6 @@
           </v-col>
         </v-row>
 
-        <!-- Statistiques globales -->
         <v-row>
           <v-col cols="3">
             <v-card outlined>
@@ -57,6 +55,38 @@
             </v-card>
           </v-col>
         </v-row>
+
+        <v-row class="d-flex align-center">
+          <v-col cols="6">
+            <v-select
+              v-model="selectedCourse"
+              :items="courses"
+              item-title="name"
+              item-value="id"
+              label="Sélectionner un cours"
+              outlined
+              dense
+            ></v-select>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="12">
+            <v-card v-if="courseStats" outlined>
+              <v-card-title>Statistiques du Cours : {{ courseStats.courseName }}</v-card-title>
+              <v-card-subtitle>Informations détaillées</v-card-subtitle>
+              <v-card-text>
+                <p><strong>Code du Cours:</strong> {{ courseStats.courseCode }}</p>
+                <p><strong>Moyenne des Notes:</strong> {{ courseStats.averageGrade }} / 20</p>
+                <p><strong>Note Minimale:</strong> {{ courseStats.minGrade }} / 20</p>
+                <p><strong>Note Maximale:</strong> {{ courseStats.maxGrade }} / 20</p>
+                <p><strong>Nombre d'Étudiants:</strong> {{ courseStats.totalStudents }}</p>
+                <p><strong>Taux de Réussite:</strong> {{ courseStats.successRate }}%</p>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+
       </v-container>
     </v-main>
   </v-app>
@@ -76,13 +106,15 @@ export default defineComponent({
       totalCourses: "0",
       averageSuccessRate: 0,
     });
-
+    const courseStats = ref<any>(null);
     const academicYears = ref(["2022-2023", "2023-2024", "2024-2025"]);
-    const selectedYear = ref(academicYears.value[0]); // Année par défaut (première année)
+    const courses = ref<any[]>([]);
+    const selectedYear = ref(academicYears.value[0]);
+    const selectedCourse = ref(null);
     const token = Cookies.get("token");
+    const errorSnackbar = ref(false);
 
     const fetchGlobalStats = async () => {
-      console.log("Année académique sélectionnée : ", selectedYear.value);
       try {
         const response = await axios.get("http://localhost:3000/api/stats/global", {
           headers: {
@@ -92,27 +124,60 @@ export default defineComponent({
             academicYear: selectedYear.value,
           },
         });
-
-        console.log("Statistiques globales récupérées : ", response.data);
-
         globalStats.value = response.data;
       } catch (error) {
-        console.error("Erreur lors de la récupération des statistiques globales", error);
+        errorSnackbar.value = true;
       }
     };
 
-    // Surveillance des changements dans selectedYear
-    watch(selectedYear, (newYear) => {
-      console.log("Nouvelle année sélectionnée : ", newYear);
-      fetchGlobalStats();
-    });
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/courses", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("Courses data:", response.data);
+        courses.value = response.data;
+      } catch (error) {
+        errorSnackbar.value = true;
+      }
+    };
+
+    const fetchCourseStats = async () => {
+      if (!selectedCourse.value) return;
+      try {
+        const response = await axios.get(`http://localhost:3000/api/stats/course/${selectedCourse.value}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            academicYear: selectedYear.value,
+          },
+        });
+        courseStats.value = response.data;
+      } catch (error) {
+        errorSnackbar.value = true;
+      }
+    };
+
+    watch(selectedYear, fetchGlobalStats);
+    watch(selectedCourse, fetchCourseStats);
 
     onMounted(() => {
-      console.log("Chargement initial avec l'année : ", selectedYear.value);
       fetchGlobalStats();
+      fetchCourses();
     });
 
-    return { globalStats, academicYears, selectedYear, fetchGlobalStats };
+    return {
+      globalStats,
+      academicYears,
+      selectedYear,
+      selectedCourse,
+      courses,
+      courseStats,
+      errorSnackbar,
+    };
   },
 });
 </script>
