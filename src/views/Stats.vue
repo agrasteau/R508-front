@@ -87,7 +87,6 @@
           </v-col>
         </v-row>
 
-
         <v-row class="d-flex align-center">
           <v-col cols="6">
             <v-select
@@ -114,6 +113,13 @@
               <p><strong>Nombre de Cours :</strong> {{ stat.coursesCount }}</p>
               <hr />
             </div>
+          </v-card-text>
+        </v-card>
+
+        <!-- Message si aucune information n'est disponible -->
+        <v-card v-else outlined>
+          <v-card-text>
+            <p>Il n'y a aucune donnée disponible pour cet étudiant pour l'année académique sélectionnée.</p>
           </v-card-text>
         </v-card>
 
@@ -170,7 +176,6 @@ export default defineComponent({
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("Courses data:", response.data);
         courses.value = response.data;
       } catch (error) {
         errorSnackbar.value = true;
@@ -182,10 +187,7 @@ export default defineComponent({
         const response = await axios.get("http://localhost:3000/api/students", {
           headers: {
             Authorization: `Bearer ${token}`,
-          },
-        });
-
-        console.log("Students data:", response.data);
+          },});
         students.value = response.data;
 
         // Ajouter le champ 'fullName' pour chaque étudiant
@@ -244,10 +246,10 @@ export default defineComponent({
 
 
     watch([selectedYear, selectedCourse, selectedStudent], () => {
-  fetchGlobalStats(); // Récupérer les statistiques globales dès que selectedYear change
-  fetchCourseStats(); // Récupérer les statistiques des cours dès que selectedCourse change
-  fetchStudentStats(); // Récupérer les statistiques des étudiants dès que selectedStudent change
-});
+      fetchGlobalStats(); // Récupérer les statistiques globales dès que selectedYear change
+      fetchCourseStats(); // Récupérer les statistiques des cours dès que selectedCourse change
+      fetchStudentStats(); // Récupérer les statistiques des étudiants dès que selectedStudent change
+    });
 
     onMounted(() => {
       fetchGlobalStats();
