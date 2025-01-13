@@ -3,10 +3,11 @@
       <v-main>
         <v-container>
           <v-card>
-            <v-card-title>Ajouter un nouveau cours</v-card-title>
+            <v-card-title id="new_course_title">Ajouter un nouveau cours</v-card-title>
             <v-card-text>
               <v-form ref="form" v-model="valid">
                 <v-text-field
+                  id="course_code"
                   label="Code du cours"
                   v-model="course.code"
                   :rules="[rules.required]"
@@ -14,6 +15,7 @@
                 ></v-text-field>
   
                 <v-text-field
+                  id="course_name"
                   label="Nom du cours"
                   v-model="course.name"
                   :rules="[rules.required]"
@@ -21,6 +23,7 @@
                 ></v-text-field>
   
                 <v-text-field
+                  id="course_credits"
                   label="Crédits"
                   v-model="course.credits"
                   type="number"
@@ -29,13 +32,14 @@
                 ></v-text-field>
   
                 <v-textarea
+                  id="course_description"
                   label="Description"
                   v-model="course.description"
                   :rules="[rules.required]"
                   required
                 ></v-textarea>
   
-                <v-btn :disabled="!valid" @click="submitCourse" color="primary">
+                <v-btn :disabled="!valid" id="submit_button" @click="submitCourse" color="primary">
                   Ajouter
                 </v-btn>
               </v-form>

@@ -2,6 +2,7 @@
   <v-container>
     <!-- Barre de recherche -->
     <v-text-field
+      id="search_bar"
       v-model="search"
       label="Rechercher..."
       prepend-inner-icon="mdi-magnify"

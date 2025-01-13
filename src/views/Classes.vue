@@ -2,9 +2,16 @@
   <v-app>
 <v-main>
       <v-container>
-        <v-btn class="pink-btn" @click="$router.push('/newcourse')">
-          <v-icon left></v-icon> Ajout d'un nouveau cours
-        </v-btn>
+        <v-row class="align-center justify-space-between">
+          <v-col cols="auto">
+            <h3 id='title_classes'>Cours</h3>
+          </v-col>
+          <v-col cols="auto">
+            <v-btn id='new_classe' color="primary" @click="$router.push('/newcourse')">
+                Ajout d'un nouveau cours
+            </v-btn>      
+          </v-col>
+        </v-row>
         <v-list>
           <ListItem
           :headers="mheaders"
