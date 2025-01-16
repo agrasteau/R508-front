@@ -13,7 +13,6 @@ import Header from './components/Header.vue';
 import ListItem from './components/ListItem.vue'; 
 import Login from './components/Login.vue';
 
-
 export default defineComponent({
   name: 'App',
   components: {

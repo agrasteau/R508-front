@@ -1,10 +1,12 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Students from "../views/Students.vue";
-import Stats from "../views/Stats.vue";
-import Grades from "../views/Grades.vue";
-import Classes from "../views/Classes.vue";
-import Login from "../views/Login.vue";
-import StudentDetail from "../views/StudentDetail.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import Students from '../views/Students.vue';
+import Stats from '../views/Stats.vue';
+import Grades from '../views/Grades.vue';
+import Classes from '../views/Classes.vue';
+import Login from '../views/Login.vue';
+import StudentDetail from '../views/StudentDetail.vue';
+import NewCourse from '../views/NewCourse.vue';
+import EditCourse from '../views/EditCourse.vue';
 import Cookies from "js-cookie";
 import NewGrades from "../views/NewGrades.vue";
 import EditGrades from "../views/EditGrades.vue";
@@ -63,6 +65,16 @@ const routes = [
     path: "/newstudents",
     name: "newstudent",
     component: NewStudents,
+  },
+  {
+    path: '/newcourse',
+    name: 'newcourse',
+    component: NewCourse,
+  },
+  {
+    path: '/editcourse',
+    name: 'editcourse',
+    component: EditCourse,
   },
 ];
 

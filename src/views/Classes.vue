@@ -2,16 +2,22 @@
   <v-app>
 <v-main>
       <v-container>
-        classes
+        <v-row class="align-center justify-space-between">
+          <v-col cols="auto">
+            <h3 id='title_classes'>Cours</h3>
+          </v-col>
+          <v-col cols="auto">
+            <v-btn id='new_classe' color="primary" @click="$router.push('/newcourse')">
+                Ajout d'un nouveau cours
+            </v-btn>      
+          </v-col>
+        </v-row>
         <v-list>
           <ListItem
-            v-for="(item, index) in listItems"
-            :key="index"
-            :title="item.title"
-            :subtitle="item.subtitle"
-            :icon="item.icon"
-            :action="item.action"
-            @action-click="handleActionClick"
+          :headers="mheaders"
+          :items="items"
+          @edit="editCourse"
+          @delete="deleteCourse"
           />
         </v-list>
       </v-container>
@@ -21,9 +27,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import Header from '../components/Header.vue';  // Import the Header component
 import ListItem from '../components/ListItem.vue'; // Import the ListItem component
+import { useRouter } from 'vue-router';
+
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export default defineComponent({
   name: 'Classes',
@@ -31,6 +41,81 @@ export default defineComponent({
     Header,
     ListItem
   },
+  setup() {
+    const token = Cookies.get('token');
+    const router = useRouter();
+
+    const mheaders = ref(
+      [
+        {
+          title: "Id",
+          key: "id",
+        },
+        {
+          title: "Code",
+          key: "code",
+        },
+        {
+          title: "Name",
+          key: "name",
+        },
+        {
+          title: "Credits",
+          key: "credits",
+        },
+        {
+          title: "Description",
+          key: "description",
+        },
+        { 
+          title: "Actions", 
+          key: "actions" 
+        },
+      ]
+    );
+
+    const items = ref([]);
+    //const items = ref<Course[]>([]);
+
+    const fetchItems = async () => {
+      try{
+        const coursesResponse = await axios.get("http://localhost:3000/api/courses", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    items.value = coursesResponse.data;
+  }
+    catch{} 
+  }
+
+  const editCourse = async (id: number) => {
+    router.push(`/editcourse?id=${id}`);
+    }
+
+  const deleteCourse = async (id: number) => {
+      try {
+        await axios.delete(`http://localhost:3000/api/courses/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        fetchItems();
+      } catch (error) {
+        console.error("Erreur lors de la suppression du cours", error);
+        alert("Erreur lors de la suppression du cours.");
+      }
+    }
+
+
+  onMounted(() => {
+      fetchItems();
+      console.log(items);
+    });
+  return {items, mheaders, deleteCourse, editCourse};
+  },
+
   data() {
     return {
       listItems: [
@@ -42,11 +127,6 @@ export default defineComponent({
       ]
     };
   },
-  methods: {
-    handleActionClick() {
-      // Action triggered when the button in ListItem is clicked
-      alert('Action button clicked!');
-    }
-  }
 });
+
 </script>
