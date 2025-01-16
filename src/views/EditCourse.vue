@@ -52,7 +52,7 @@
   
   <script lang="ts">
   import { defineComponent, ref, onMounted } from "vue";
-  import axios from "axios";
+  import api from "../plugins/api";
   import Cookies from "js-cookie";
   import { useRouter, useRoute } from "vue-router";
   
@@ -79,11 +79,7 @@
   
       const fetchCourse = async (id: number) => {
         try {
-          const response = await axios.get(`http://localhost:3000/api/courses/${id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await api.get(`/courses/${id}`);
           course.value = response.data;
         } catch (error) {
           console.error("Erreur lors de la récupération du cours", error);
@@ -98,14 +94,9 @@
             credits: Number(course.value.credits) || 0,
           };
   
-          await axios.put(
-            `http://localhost:3000/api/courses/${course.value.id}`,
-            preparedCourse,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
+          await api.put(
+            `/courses/${course.value.id}`,
+            preparedCourse
           );
 
           router.push("/classes");
