@@ -40,6 +40,7 @@
   <script lang="ts">
   import { defineComponent, ref } from "vue";
   import api from "../plugins/api";
+  import router from "../router";
   
   export default defineComponent({
     name: "NewStudents",
@@ -55,7 +56,10 @@
       const submitForm = async () => {
         try {
           await api.post("/students", newStudent.value);
-          alert("Étudiant créé avec succès !");
+          
+          
+          router.push("/students")
+
           // Réinitialiser le formulaire après la création de l'étudiant
           newStudent.value = {
             firstName: "",
