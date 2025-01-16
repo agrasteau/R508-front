@@ -130,7 +130,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, watch } from "vue";
-import axios from "axios";
+import api from "../plugins/api";
 import Cookies from "js-cookie";
 
 export default defineComponent({
@@ -155,10 +155,7 @@ export default defineComponent({
 
     const fetchGlobalStats = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/stats/global", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await api.get("/stats/global", {
           params: {
             academicYear: selectedYear.value,
           },
@@ -171,11 +168,7 @@ export default defineComponent({
 
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/courses", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await api.get("/courses");
         courses.value = response.data;
       } catch (error) {
         errorSnackbar.value = true;
@@ -184,10 +177,7 @@ export default defineComponent({
 
     const fetchStudents = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/students", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },});
+        const response = await api.get("/students");
         students.value = response.data;
 
         // Ajouter le champ 'fullName' pour chaque étudiant
@@ -204,10 +194,7 @@ export default defineComponent({
     const fetchCourseStats = async () => {
       if (!selectedCourse.value) return;
       try {
-        const response = await axios.get(`http://localhost:3000/api/stats/course/${selectedCourse.value}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await api.get(`/stats/course/${selectedCourse.value}`, {
           params: {
             academicYear: selectedYear.value,
           },
@@ -224,12 +211,9 @@ export default defineComponent({
         return;
       }
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/stats/student/${selectedStudent.value}`,
+        const response = await api.get(
+          `/stats/student/${selectedStudent.value}`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
             params: {
               academicYear: selectedYear.value,
             },
