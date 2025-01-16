@@ -5,6 +5,7 @@ import { VApp, VAppBar, VToolbarTitle, VSpacer, VBtn, VList,VAutocomplete, VIcon
 import 'vuetify/styles';
 import '@mdi/font/css/materialdesignicons.css'; // Import MDI icons CSS
 import router from './router';
+// import 'dotenv/config';
 
 const vuetify = createVuetify({
   icons: {

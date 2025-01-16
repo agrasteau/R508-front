@@ -10,6 +10,8 @@ import EditCourse from '../views/EditCourse.vue';
 import Cookies from "js-cookie";
 import NewGrades from "../views/NewGrades.vue";
 import EditGrades from "../views/EditGrades.vue";
+import NewStudents from "../views/NewStudents.vue";
+import NewStudents from "../views/NewStudents.vue";
 
 const routes = [
   {
@@ -58,6 +60,11 @@ const routes = [
     name: "student-detail",
     component: StudentDetail,
     props: true, // permet de passer l'id en tant que prop à StudentDetail
+  },
+  {
+    path: "/newstudents",
+    name: "newstudent",
+    component: NewStudents,
   },
   {
     path: '/newcourse',
