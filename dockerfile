@@ -4,11 +4,6 @@ FROM node:22
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Installer des utilitaires supplémentaires
-RUN apt-get update && \
-    apt-get install -y gdb && \
-    apt autoremove
-
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
 COPY package*.json ./
 
