@@ -22,14 +22,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
+      # - name: Install Docker Compose
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y docker-compose
 
       - name: Docker Compose Up
         run: |
-          docker compose up -d
+          docker compose up
 
           
       #     build -t registry.lilian-daurat.com/cours/r5-08-front:${{ github.sha }} -t registry.lilian-daurat.com/cours/r5-08-front:latest .
