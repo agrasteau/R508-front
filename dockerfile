@@ -16,7 +16,7 @@ COPY . .
 # Construire l'application
 RUN npm run build
 
-# Exposer le port 80
+# Exposer le port 5173
 EXPOSE 5173
 
 RUN echo "VITE_API_BASE_URL=${API_URL}" > .env
