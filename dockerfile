@@ -1,5 +1,5 @@
 # Étape 1 : Construire l'application
-FROM node:22
+FROM node:latest
 
 # Définir le répertoire de travail
 WORKDIR /app
