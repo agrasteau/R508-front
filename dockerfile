@@ -4,7 +4,7 @@ FROM node:22
 # Définir le répertoire de travail
 WORKDIR /app
 
-RUN npm uninstall -g npm && npm install -g npm
+RUN npm -v
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
 COPY package*.json ./
