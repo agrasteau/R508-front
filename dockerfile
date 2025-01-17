@@ -1,10 +1,15 @@
 # Étape 1 : Construire l'application
-FROM node:22
+FROM debian:latest
 
 # Définir le répertoire de travail
 WORKDIR /app
 
-RUN npm -v
+# Installer Node.js et npm
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y nodejs && \
+    npm -v
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
 COPY package*.json ./
