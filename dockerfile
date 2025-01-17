@@ -19,8 +19,6 @@ RUN npm run build
 # Exposer le port 80
 EXPOSE 5173
 
-# ENV API_URL=http://localhost:3000/api
-
 RUN echo "VITE_API_BASE_URL=${API_URL}" > .env
 
 # Commande par défaut pour lancer Nginx
