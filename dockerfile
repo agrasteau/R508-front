@@ -4,19 +4,19 @@ FROM node:22
 # Définir le répertoire de travail
 WORKDIR /app
 
+RUN apt autoremove
+
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
 COPY package*.json ./
 
-run /usr/local/bin/npm cache clean --force
-
 # Installer les dépendances
-RUN /usr/local/bin/npm install
+RUN npm install
 
 # Copier tout le contenu du projet
 COPY . .
 
 # Construire l'application
-RUN /usr/local/bin/npm run build
+RUN npm run build
 
 # Exposer le port 5173
 EXPOSE 5173
@@ -24,4 +24,4 @@ EXPOSE 5173
 RUN echo "VITE_API_BASE_URL=${API_URL}" > .env
 
 # Commande par défaut pour lancer Nginx
-CMD ["/usr/local/bin/npm", "run", "start"]
+CMD ["npm", "run", "start"]
