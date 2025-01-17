@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Configurer ulimit pour permettre la création de dumps
-RUN ulimit -c unlimited
+RUN npm cache verify
 
 # Installer les dépendances
 RUN npm install
