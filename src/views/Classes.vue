@@ -32,7 +32,7 @@ import Header from '../components/Header.vue';  // Import the Header component
 import ListItem from '../components/ListItem.vue'; // Import the ListItem component
 import { useRouter } from 'vue-router';
 
-import axios from 'axios';
+import api from '../plugins/api';
 import Cookies from 'js-cookie';
 
 export default defineComponent({
@@ -79,11 +79,7 @@ export default defineComponent({
 
     const fetchItems = async () => {
       try{
-        const coursesResponse = await axios.get("http://localhost:3000/api/courses", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+        const coursesResponse = await api.get("/courses");
     items.value = coursesResponse.data;
   }
     catch{} 
@@ -95,12 +91,7 @@ export default defineComponent({
 
   const deleteCourse = async (id: number) => {
       try {
-        await axios.delete(`http://localhost:3000/api/courses/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
+        await api.delete(`/courses/${id}`);
         fetchItems();
       } catch (error) {
         console.error("Erreur lors de la suppression du cours", error);

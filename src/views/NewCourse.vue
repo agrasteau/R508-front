@@ -52,7 +52,7 @@
   
   <script lang="ts">
   import { defineComponent, ref } from "vue";
-  import axios from "axios";
+  import api from "../plugins/api";
   import Cookies from "js-cookie";
   import { useRouter } from "vue-router";
   
@@ -86,14 +86,9 @@
 
           console.log("Données à envoyer : ", preparedCourse);
   
-          const response = await axios.post(
+          const response = await api.post(
             "http://localhost:3000/api/courses",
-            preparedCourse,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
+            preparedCourse
           );
 
           router.push("/classes");
