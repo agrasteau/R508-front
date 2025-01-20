@@ -22,7 +22,7 @@ RUN npm run build
 # Exposer le port 5173
 EXPOSE 5173
 
-ARG API_URL
+ARG API_URL https://api.lilian-daurat.com/api
 # Ajouter la variable d'environnement API_URL 
 ENV VITE_API_BASE_URL "$API_URL"
 
