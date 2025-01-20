@@ -29,4 +29,4 @@ ENV VITE_API_BASE_URL=$API_URL
 RUN echo "VITE_API_BASE_URL=${VITE_API_BASE_URL}" > .env
 
 # Commande par défaut pour lancer l'application
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]
