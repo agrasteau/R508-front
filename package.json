@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "serve -s dist -l 5173"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
@@ -14,6 +15,7 @@
     "dotenv": "^16.4.7",
     "js-cookie": "^3.0.5",
     "material-design-icons-iconfont": "^6.7.0",
+    "serve": "^14.2.4",
     "vitepress": "^1.5.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
