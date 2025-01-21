@@ -1,30 +1,40 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <v-app>
+    <v-main>
+    <Header v-if="showTopBar" />
+    <router-view @disableBar="disableBar" @enableBar="enableBar" />
+    </v-main>
+   </v-app>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import Header from './components/Header.vue'; 
+import ListItem from './components/ListItem.vue'; 
+import Login from './components/Login.vue';
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    Header,
+    ListItem,
+  },
+  data() {
+    return {
+      showTopBar: true
+    }
+  },
+  methods: {
+    handleActionClick() {
+      // Action triggered when the button in ListItem is clicked
+      alert('Action button clicked!');
+    },
+    disableBar() {
+      this.showTopBar = false;
+    },
+    enableBar() {
+      this.showTopBar = true;  
+    }
+  }
+});
+</script>
