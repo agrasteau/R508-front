@@ -70,7 +70,7 @@ export default defineComponent({
 
     const fetchGrade = async (id : number) => {
       try {
-        const response = await api.get(`/grades/`);
+        const response = await api.get(`/grades`);
         response.data.forEach((element : {id : number, studentId : Number, courseId : number, grade : number, semester : string, academicYear: string}) => {
           if (element.id == id) {
             console.log(element);
