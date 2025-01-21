@@ -87,7 +87,7 @@
           console.log("Données à envoyer : ", preparedCourse);
   
           const response = await api.post(
-            "http://localhost:3000/api/courses",
+            "/courses",
             preparedCourse
           );
 
