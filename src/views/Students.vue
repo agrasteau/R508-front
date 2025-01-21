@@ -3,6 +3,8 @@
     <v-main>
       <v-container>
         <v-btn @click="ajouterUnEleve" color="primary">Ajouter un eleve</v-btn>
+        <h3 id='title_students'>Etudiants</h3>
+
         <v-list>
           <v-list-item-group>
             <v-list-item

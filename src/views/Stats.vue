@@ -4,7 +4,7 @@
       <v-container>
         <v-row class="d-flex align-center">
           <v-col cols="6">
-            <h1>Statistiques</h1>
+            <h3 id='title_stats'>Statistiques</h3>
           </v-col>
           <v-col cols="6">
             <v-select
