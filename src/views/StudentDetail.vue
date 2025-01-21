@@ -150,8 +150,6 @@ export default defineComponent({
 
     onMounted(() => {
       const idStudent: number = Number(route.params.id);
-
-      fetchPdfLink();
       fetchStudent(idStudent);
       fetchGrades(idStudent);
     });
